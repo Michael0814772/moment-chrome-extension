@@ -1,27 +1,27 @@
 const time = document.getElementById("time"),
-  greeting = document.getElementById("greeting"),
-  name = document.getElementById("name"),
-  focus = document.getElementById("focus");
+    greeting = document.getElementById("greeting"),
+    name = document.getElementById("name"),
+    focus = document.getElementById("focus");
 
 //show time
 function showTime() {
-  let today = new Date(),
-    hour = today.getHours(),
-    minutes = today.getMinutes(),
-    seconds = today.getSeconds();
+    let today = new Date(),
+        hour = today.getHours(),
+        minutes = today.getMinutes(),
+        seconds = today.getSeconds();
 
-  //set AM or PM
-  const amPm = hour >= 12 ? 'PM' : 'AM';
+    //set AM or PM
+    const amPm = hour >= 12 ? 'PM' : 'AM';
 
-  //12 hour format
-  hour  = hour % 12 || 12;
+    //12 hour format
+    hour = hour % 12 || 12;
 
-  
 
-  //output time
-  time.innerHTML = `${hour}<span>:</span>${addZeros(minutes)}<span>:</span>${addZeros(seconds)} ${amPm}`;
 
-  setTimeout(showTime, 1000);
+    //output time
+    time.innerHTML = `${hour}<span>:</span>${addZeros(minutes)}<span>:</span>${addZeros(seconds)} ${amPm}`;
+
+    setTimeout(showTime, 1000);
 }
 
 //Add zeros
@@ -32,8 +32,12 @@ function addZeros(n) {
 //set background and greeting
 function setBgGreet() {
     let today = new Date(),
-    hour = today.getHours();
-    if(hour < 12) {
+        hour = today.getHours();
+    if (hour < 5) {
+        document.body.style.backgroundImage = 'url(night.jpg)';
+        greeting.innerHTML = 'Good Morning,';
+        document.body.style.color = 'white';
+    } else if (hour < 12) {
         document.body.style.backgroundImage = 'url(morning.jpg)';
         document.body.style.color = 'black';
         greeting.innerHTML = 'Good Morning,';
@@ -48,7 +52,7 @@ function setBgGreet() {
 
 //Get name
 function getName() {
-    if(localStorage.getItem('name') === null) {
+    if (localStorage.getItem('name') === null) {
         name.innerHTML = '[Enter Name]';
     } else {
         name.innerHTML = localStorage.getItem('name');
@@ -57,9 +61,9 @@ function getName() {
 
 //set name
 function setName(e) {
-    if(e.type === 'keypress') {
+    if (e.type === 'keypress') {
         //make sure enter is pressed
-        if(e.which == 13 || e.keycode == 13) {
+        if (e.which == 13 || e.keycode == 13) {
             localStorage.setItem('name', e.target.innerText);
             name.blur();
         }
@@ -70,9 +74,9 @@ function setName(e) {
 
 //set focus
 function setFocus(e) {
-    if(e.type === 'keypress') {
+    if (e.type === 'keypress') {
         //make sure enter is pressed
-        if(e.which == 13 || e.keycode == 13) {
+        if (e.which == 13 || e.keycode == 13) {
             localStorage.setItem('focus', e.target.innerText);
             focus.blur();
         }
@@ -83,7 +87,7 @@ function setFocus(e) {
 
 //Get focus
 function getFocus() {
-    if(localStorage.getItem('focus') === null) {
+    if (localStorage.getItem('focus') === null) {
         focus.innerHTML = '[Enter Focus]';
     } else {
         focus.innerHTML = localStorage.getItem('focus');
